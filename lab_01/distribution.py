@@ -1,6 +1,6 @@
 from math import sqrt
 
-from numpy.random import exponential, uniform
+from numpy.random import weibull, uniform
 
 
 class UniformDistribution:
@@ -12,9 +12,9 @@ class UniformDistribution:
         return uniform(self.mean - self.halfdiff, self.mean + self.halfdiff)
 
 
-class ExponentialDistribution:
-    def __init__(self, mean):
-        self.mean = mean
+class WeibullDistribution:
+    def __init__(self, shape):
+        self.shape = shape
 
     def generate(self):
-        return exponential(self.mean)
+        return weibull(self.shape)

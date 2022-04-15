@@ -1,15 +1,15 @@
 import numpy as np
 from matplotlib import pyplot
 
-from distribution import ExponentialDistribution, UniformDistribution
+from distribution import WeibullDistribution, UniformDistribution
 from event import Generator
 from model import Modeller
 from process import Processor
 
 
-def modelling(clients_number, mean1, mean2, standdev):
+def modelling(clients_number, mean1, shape, standdev):
     generators = [Generator(UniformDistribution(mean1, standdev), clients_number)]
-    operators = [Processor(ExponentialDistribution(mean2))]
+    operators = [Processor(WeibullDistribution(shape))]
     for generator in generators:
         generator.receivers = operators.copy()
     model = Modeller(generators, operators)
@@ -33,7 +33,7 @@ def view(start, end, N, freq, standdev, exp_amount):
 
     pyplot.title('График зависимости среднего времени пребывания в очереди от загрузки')
     pyplot.grid(True)
-    pyplot.plot(Xdata, Ydata)
+    pyplot.plot(Xdata, Ydata, "b")
     pyplot.xlabel("Коэффициент загрузки СМО")
     pyplot.ylabel("Среднее время пребывания в очереди")
     pyplot.show()

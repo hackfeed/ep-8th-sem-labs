@@ -24,7 +24,7 @@ def work_proc(Event):
     result = utils.modelling(
         clients_number=float(varList["N"].get()),
         mean1=1 / float(varList["freq1"].get()),
-        mean2=1 / float(varList["freq2"].get()),
+        shape=1 / float(varList["freq2"].get()),
         standdev=float(varList["standdev"].get())
     )
 
@@ -52,15 +52,15 @@ def one_model_list(root):
     items = [
         input.Item(text="Интенсивность поступления заявок (равномерный):",
                    var=varList["freq1"], value=10),
-        input.Item(text="Интенсивность обслуживания заявок (экспоненциальный):",
-                   var=varList["freq2"], value=15),
+        input.Item(text="Интенсивность обслуживания заявок (Вейбулла):",
+                   var=varList["freq2"], value=1),
         input.Item(text="СКО поступления:", var=varList["standdev"], value=1.0),
         input.Item(text="Число заявок:", var=varList["N"], value=1000),
     ]
     i_list = input.InputList(master=root, items=items)
     i_list.grid(column=1)
 
-    btn = Button(root, text="Запуск")
+    btn = Button(root, text="Старт")
     btn.bind("<Button-1>", work_proc)
     btn.configure(font=18)
     btn.grid(column=1, padx=10, pady=10)
@@ -70,16 +70,16 @@ def expirement_list(root):
     items = [
         input.Item(text="От:", var=varList["start"], value=0.01),
         input.Item(text="До:", var=varList["end"], value=1.0),
-        input.Item(text="Интенсивность обслуживания заявок:", var=varList["basefreq"], value=0.5),
+        input.Item(text="Интенсивность обслуживания заявок:", var=varList["basefreq"], value=1.0),
         input.Item(text="СКО поступления:", var=varList["standdev_exp"], value=1.0),
         input.Item(text="Число заявок:", var=varList["N_exp"], value=1000),
-        input.Item(text="Число экспериментов:", var=varList["exp_amount"], value=80)
+        input.Item(text="Число экспериментов:", var=varList["exp_amount"], value=100)
     ]
 
     i_list = input.InputList(master=root, items=items)
     i_list.grid(column=1)
 
-    btn2 = Button(root, text="Запуск")
+    btn2 = Button(root, text="Старт")
     btn2.configure(font=18)
     btn2.bind("<Button-1>", work_view)
     btn2.grid(column=1, padx=10, pady=10)
