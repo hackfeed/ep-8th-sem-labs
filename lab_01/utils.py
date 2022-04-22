@@ -1,8 +1,7 @@
 import numpy as np
-from matplotlib import pyplot
-
-from distribution import WeibullDistribution, UniformDistribution
+from distribution import UniformDistribution, WeibullDistribution
 from event import Generator
+from matplotlib import pyplot
 from model import Modeller
 from process import Processor
 
